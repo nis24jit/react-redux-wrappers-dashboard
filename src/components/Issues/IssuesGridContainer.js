@@ -12,7 +12,7 @@ class IssuesGridContainer extends Component {
             // Generate your own token through
             // https://github.com/settings/tokens
 
-            'Authorization': "token b95116792cba5a8169a1ec10640d8c16535c6419"
+            'Authorization': "token 4cc78d10870448008aa1f1a0ef55daa5bc10579d"
         };
 
         let url = baseUrl + '?state=all&page=2&per_page=100';
@@ -25,8 +25,6 @@ class IssuesGridContainer extends Component {
     }
 
     render() {
-        console.log('renders');
-        console.log(this.props.issues);
         return(
             <IssuesGrid issues={this.props.issues}/>
         )
