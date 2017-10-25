@@ -3,6 +3,7 @@ import { Link, Route } from 'react-router-dom';
 
 import Dashboard from './../Dashboard';
 import IssuesIndex from './../Issues';
+import Profile from './../Profile';
 import Signin from './../Signin';
 
 class MainMenu extends Component {
@@ -48,9 +49,11 @@ class MainMenu extends Component {
                     </div >
                     : null
                 }
-                <div className="col-xs p-4 py-5">
+
+                <div className="col-xs p-4 py-5"> 
                     <Route path="/dashboard" component={Dashboard}/>
                     <Route path="/issues" component={IssuesIndex}/>
+                    <Route path="/profile" component={Profile}/>
                     <Route path="/signin" component={Signin}/>
                  </div>
             </div>
