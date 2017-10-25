@@ -26,3 +26,10 @@ export const issuesProcessed = (issues, period) => {
         period
     }
 }
+
+export const userRetrieved = (user) => {
+    return {
+        type: 'USER_RETRIEVED',
+        payload: user
+    }
+}
