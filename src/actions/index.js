@@ -24,3 +24,10 @@ export const issuesProcessed = (issues) => {
         payload: issues
     }
 }
+
+export const userRetrieved = (user) => {
+    return {
+        type: 'USER_RETRIEVED',
+        payload: user
+    }
+}

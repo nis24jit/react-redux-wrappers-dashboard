@@ -20,3 +20,7 @@ span.active {
 .nav-toggle .k-i-hamburger {
   font-size: 32px;
 }
+
+.text-xs-center img {
+  width: 200px;
+}
