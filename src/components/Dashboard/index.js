@@ -5,10 +5,33 @@ import { TabStrip, Tabs, Tab, Content } from '@progress/kendo-layout-react-wrapp
 import IssuesContainer from '../Issues/IssuesContainer';
 import ChartsContainer from '../Charts/ChartsContainer';
 
+import { connect } from 'react-redux';
+import { issuesFetched, issuesProcessed } from './../../actions';
+
+const baseUrl = 'https://api.github.com/repos/telerik/kendo-ui-core/issues';
+
 class Dashboard extends Component {
+    componentDidMount() {
+        console.log("chart mounted");
+        let headers = {
+            // Generate your own token through
+            // https://github.com/settings/tokens
+
+            'Authorization': "token 4cc78d10870448008aa1f1a0ef55daa5bc10579d"
+        };
+
+        let url = baseUrl + '?state=all&page=2&per_page=100';
+
+    //     this.props.dispatch(issuesFetched());
+
+        return fetch(url, { method: 'GET', accept: 'application/json', headers: headers })
+            .then(response => response.json())
+            .then(json => this.props.dispatch(issuesProcessed(json)));
+     }
+
     render() {
         return (
-            <div>
+            <div className="dashboard">
                 <h1>FOOOOOOOOOOOOO</h1>
                 <IssuesContainer />
                 <TabStrip value="All Issues">
@@ -18,13 +41,13 @@ class Dashboard extends Component {
                             <Tab>Created by Me</Tab>
                         </Tabs>
                         <Content>
-                            <ChartsContainer />
+                            <ChartsContainer issues={this.props.issues} />
                         </Content>
                         <Content>
-                            <ChartsContainer />
+                            <ChartsContainer issues={this.props.issues} />
                         </Content>
                         <Content>
-                            <ChartsContainer />
+                            <ChartsContainer issues={this.props.issues} />
                         </Content>
                 </TabStrip>
             </div>
@@ -32,4 +55,12 @@ class Dashboard extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    debugger;
+    return {
+        issues: state.issues
+    }
+}
+
+Dashboard = connect(mapStateToProps)(Dashboard);
 export default Dashboard;

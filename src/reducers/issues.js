@@ -1,35 +1,71 @@
+import { IssuesProcessor as processor } from '../shared/issues-processor';
+
 var initialState = [
 ]
 
 export const issues = (state = initialState, action) => {
-    if (action.type === 'ISSUES_RECEIVED') {
-        let issues = action.payload;
-        let newState = issues.filter(issue => issue.pull_request ? false : true);
-        return newState;
-    } else if (action.type === 'ISSUES_PROCESSED') {
-        let data = action.payload;
+    let newState = {};
+    let data = action.payload;
+    //debugger;
+    switch (action.type) {
+        case 'ISSUES_RECEIVED':
+        debugger;
+            newState = {
+                gridData: data.filter(issue => issue.pull_request ? false : true)
+            }
+            return newState;
+        case 'ISSUES_PROCESSED':            
+            let issueTypes = processor.groupLabels(data);
 
-        let labels = aggregate(flatten(data.map(item => item.labels)), 'name');
-        let low = (labels['SEV: Low'] / data.length);
-        let medium = labels['SEV: Medium'] / data.length;
-        let high = labels['SEV: High'] / data.length;
-        let enhancement = labels['Enhancement'] / data.length;
-        let feature = labels['Feature'] / data.length;
-        let other = 1 - low - medium - high - enhancement - feature;
+            let typesDistribution = processor.distribution(data);
+            debugger;
+            let seriesColors = [
+                { label: "SEV: Low", value: "#FF9966", active: false },
+                { label: "SEV: Medium", value: "#BB6ACB", active: false },
+                { label: "SEV: High", value: "#52C3D3", active: false },
+                { label: "Enhancement", value: "#22C85D", active: false },
+                { label: "Feature", value: "#FF6358", active: false },
+                { label: "Others", value: "#2BA7DA", active: false }
+            ];
+  
+            let visibleSeries = [{
+                markers: { visible: false },
+                color: seriesColors[0].value,
+                categoryField: "date",
+                field: "value"
+            },
+            {
+                markers: { visible: false },
+                color: seriesColors[1].value,
+                categoryField: "date",
+                field: "value"
+            }]
 
-        let result = [
-            { type: 'SEV: LOW', value: parseFloat(low.toFixed(2)) },
-            { type: 'SEV: MEDIUM', value: parseFloat(medium.toFixed(2)) },
-            { type: 'SEV: HIGH', value: parseFloat(high.toFixed(2)) },
-            { type: 'ENHANCEMENT', value: parseFloat(enhancement.toFixed(2)) },
-            { type: 'FEATURE', value: parseFloat(feature.toFixed(2)) },
-            { type: 'OTHER', value: parseFloat(other.toFixed(2)) }
-          ];
-
-        let newState = result;
-        return newState;
-    } else {
-        return state;
+            newState = {
+                gridData: data,
+                issueTypes,
+                typesSeries: visibleSeries,
+                typesDistribution: [{
+                    value: 10,
+                    date: new Date(2017, 2, 1)
+                }, {
+                    value: 30,
+                    date: new Date(2017, 3, 3)
+                },  {
+                    value: 20,
+                    date: new Date(2017, 4, 4)
+                },  {
+                    value: 40,
+                    date: new Date(2017, 5, 5)
+                }
+    
+                ],
+                seriesColors
+            };
+            
+            return newState;
+        default:
+            return state;
     }
 };
 

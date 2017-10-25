@@ -6,12 +6,13 @@ class IssueTypes extends Component {
         super(props);
  
         this.options = {
-
+            theme: "material",
             series: [{
-                type: "bar",
-                holeSize: "100",
+                type: "donut",
+                holeSize: 100,
                 field: 'value',
-                categoryField: 'type'
+                categoryField: 'type',
+                overlay: false
             }],
             legend: {
                 position: "bottom",
@@ -24,9 +25,14 @@ class IssueTypes extends Component {
 
     render() {
         return (
-            /* eslint-disable */
-            <Chart dataSource={new kendo.data.DataSource({data: this.props.issues})} {...this.options} />
-            /* eslint-enable */
+             /* eslint-disable */
+            <div className="issue-types">
+                <h4 className="card-header">Issue Types</h4>
+                <div className="card-block">
+                    <Chart dataSource={new kendo.data.DataSource({ data: this.props.issues })} {...this.options} />
+                </div>
+            </div>
+             /* eslint-enable */
         )
     }
 }

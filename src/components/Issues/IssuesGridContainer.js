@@ -8,6 +8,7 @@ const baseUrl = 'https://api.github.com/repos/telerik/kendo-ui-core/issues';
 
 class IssuesGridContainer extends Component {
     componentDidMount() {
+        console.log("grid mounted");
         let headers = {
             // Generate your own token through
             // https://github.com/settings/tokens
@@ -17,7 +18,7 @@ class IssuesGridContainer extends Component {
 
         let url = baseUrl + '?state=all&page=2&per_page=100';
 
-        this.props.dispatch(issuesFetched());
+        //this.props.dispatch(issuesFetched());
 
         return fetch(url, { method: 'GET', accept: 'application/json', headers: headers })
             .then(response => response.json())
@@ -26,7 +27,7 @@ class IssuesGridContainer extends Component {
 
     render() {
         return(
-            <IssuesGrid issues={this.props.issues}/>
+            <IssuesGrid issues={this.props.issues.gridData}/>
         )
     }
 }
