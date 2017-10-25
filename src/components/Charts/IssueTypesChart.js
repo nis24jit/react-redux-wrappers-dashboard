@@ -2,15 +2,13 @@ import React, {Component} from 'react';
 import {Chart} from '@progress/kendo-charts-react-wrapper';
 
 class IssueTypes extends Component {
-
-
-    constructor(props) {
+    constructor(props: any) {
         super(props);
 
         this.options = {
-            theme: "material",
+            theme: 'material',
             series: [{
-                type: "donut",
+                type: 'donut',
                 holeSize: 100,
                 field: 'value',
                 categoryField: 'type',
@@ -28,12 +26,12 @@ class IssueTypes extends Component {
     render() {
         return (
              /* eslint-disable */
-            <div className="issue-types">
+            <div>
                 <h4 className="card-header">Issue Types</h4>
                 <div className="card-block">
                     <Chart dataSource={new kendo.data.DataSource({ data: this.props.issues })} {...this.options} />
 
-                     <div className="comp-label chart-label">
+                    <div className="comp-label chart-label">
                         <strong>30</strong>
                         <small>label</small>
                     </div>

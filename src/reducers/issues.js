@@ -6,7 +6,7 @@ var initialState = [
 export const issues = (state = initialState, action) => {
     let newState = {};
     let data = action.payload;
-    //debugger;
+
     switch (action.type) {
         case 'ISSUES_RECEIVED':
         debugger;
@@ -14,7 +14,7 @@ export const issues = (state = initialState, action) => {
                 gridData: data.filter(issue => issue.pull_request ? false : true)
             }
             return newState;
-        case 'ISSUES_PROCESSED':            
+        case 'ISSUES_PROCESSED':
             let issueTypes = processor.groupLabels(data);
 
             let typesDistribution = processor.distribution(data);
@@ -27,7 +27,7 @@ export const issues = (state = initialState, action) => {
                 { label: "Feature", value: "#FF6358", active: false },
                 { label: "Others", value: "#2BA7DA", active: false }
             ];
-  
+
             let visibleSeries = [{
                 markers: { visible: false },
                 color: seriesColors[0].value,
@@ -58,11 +58,11 @@ export const issues = (state = initialState, action) => {
                     value: 40,
                     date: new Date(2017, 5, 5)
                 }
-    
+
                 ],
                 seriesColors
             };
-            
+
             return newState;
         default:
             return state;

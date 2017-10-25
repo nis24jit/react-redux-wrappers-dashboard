@@ -84,7 +84,6 @@ class ActiveIssues extends Component {
 
     render() {
         return (
-
             <div className="card">
             <h3 className="card-header">Active Issues</h3>
             <div className="card-block">
