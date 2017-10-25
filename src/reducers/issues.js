@@ -9,7 +9,6 @@ export const issues = (state = initialState, action) => {
 
     switch (action.type) {
         case 'ISSUES_RECEIVED':
-        debugger;
             newState = {
                 gridData: data.filter(issue => issue.pull_request ? false : true)
             }
@@ -18,7 +17,7 @@ export const issues = (state = initialState, action) => {
             let issueTypes = processor.groupLabels(data);
 
             let typesDistribution = processor.distribution(data);
-            debugger;
+
             let seriesColors = [
                 { label: "SEV: Low", value: "#FF9966", active: false },
                 { label: "SEV: Medium", value: "#BB6ACB", active: false },

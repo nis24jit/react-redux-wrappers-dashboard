@@ -5,35 +5,35 @@ class TypesDistribution extends Component {
     constructor(props) {
         super(props);
 
-        this.series = [{
-            markers: { visible: false },
-            color: "#ccc",
-            categoryField: "date",
-            field: "value"
-        },
-        {
-            markers: { visible: false },
-            color:"#aaa",
-            categoryField: "date",
-            field: "value"
-        }];
+        //this.series = [{
+        //    markers: { visible: false },
+        //    color: "#ccc",
+        //    categoryField: "date",
+        //    field: "value"
+        //},
+        //{
+        //    markers: { visible: false },
+        //    color:"#aaa",
+        //    categoryField: "date",
+        //    field: "value"
+        //}];
 
 
-        this.data = [{
-            value: 10,
-            date: new Date(2017, 2, 1)
-        }, {
-            value: 30,
-            date: new Date(2017, 3, 3)
-        },  {
-            value: 20,
-            date: new Date(2017, 4, 4)
-        },  {
-            value: 40,
-            date: new Date(2017, 5, 5)
-        }
+        //this.data = [{
+        //    value: 10,
+        //    date: new Date(2017, 2, 1)
+        //}, {
+        //    value: 30,
+        //    date: new Date(2017, 3, 3)
+        //},  {
+        //    value: 20,
+        //    date: new Date(2017, 4, 4)
+        //},  {
+        //    value: 40,
+        //    date: new Date(2017, 5, 5)
+        //}
 
-        ];
+        //];
 
         this.options = {
             seriesDefaults: {
@@ -54,7 +54,8 @@ class TypesDistribution extends Component {
                 line: {
                     visible: false
                 }
-            }, valueAxis: {
+            },
+            valueAxis: {
                 line: {
                     visible: false
                 },
@@ -126,7 +127,7 @@ class TypesDistribution extends Component {
                     {
                         this.seriesColors.map((item) => {
                             return (
-                                <a class="col-xs-4 col-sm-3 col-md comp-label">
+                                <a className="col-xs-4 col-sm-3 col-md comp-label">
                                     <strong>item.label</strong>
                                     <small>item.label</small>
                                 </a>
@@ -135,7 +136,11 @@ class TypesDistribution extends Component {
                     }
                 </div>
                 <div className="card-block">
-                     <Chart dataSource={new kendo.data.DataSource({data: this.props.types.typesDistribution})} series={this.props.types.typesSeries} {...this.options}  />
+                     <Chart
+                        dataSource={new kendo.data.DataSource({data: this.props.types.typesDistribution})}
+                        series={this.props.types.typesSeries}
+                        {...this.options}
+                    />
 
                 </div>
             </div>

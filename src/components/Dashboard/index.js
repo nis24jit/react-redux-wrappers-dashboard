@@ -56,7 +56,6 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = (state) => {
-    debugger;
     return {
         issues: state.issues
     }
