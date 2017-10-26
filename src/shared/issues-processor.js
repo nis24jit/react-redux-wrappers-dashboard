@@ -170,13 +170,13 @@ const colors = {
         });
       }
     
-      filterByUsername(data, username) {
+      static filterByUsername(data, username) {
         return this.process(data, 12).active.filter(value => {
           return value.assignee === username;
         });
       };
     
-      getMonthsRange(months) {
+      static getMonthsRange(months) {
         let since = new Date();
         since.setMonth(since.getMonth() - months);
         return since;

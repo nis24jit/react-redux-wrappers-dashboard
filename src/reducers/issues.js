@@ -4,21 +4,24 @@ var initialState = [
 ]
 
 export const issues = (state = initialState, action) => {
-    let newState = {};
+    let newState = Object.assign({}, state);
+
     let data = action.payload;
-    //debugger;
+    let period = action.period ? action.period : 3;
+
+
     switch (action.type) {
         case 'ISSUES_RECEIVED':
-        debugger;
-            newState = {
-                gridData: data.filter(issue => issue.pull_request ? false : true)
-            }
+            data = processor.filterByMonth(data, period);
+            newState.gridData =  data.filter(issue => issue.pull_request ? false : true);
+            
             return newState;
-        case 'ISSUES_PROCESSED':            
+        case 'ISSUES_PROCESSED':      
+            data = processor.filterByMonth(data, period);      
             let issueTypes = processor.groupLabels(data);
-
-            let typesDistribution = processor.distribution(data);
             debugger;
+            let typesDistribution = processor.distribution(data);
+            
             let seriesColors = [
                 { label: "SEV: Low", value: "#FF9966", active: false },
                 { label: "SEV: Medium", value: "#BB6ACB", active: false },
@@ -39,29 +42,49 @@ export const issues = (state = initialState, action) => {
                 color: seriesColors[1].value,
                 categoryField: "date",
                 field: "value"
-            }]
+            }];
 
-            newState = {
-                gridData: data,
-                issueTypes,
-                typesSeries: visibleSeries,
-                typesDistribution: [{
-                    value: 10,
-                    date: new Date(2017, 2, 1)
-                }, {
-                    value: 30,
-                    date: new Date(2017, 3, 3)
-                },  {
-                    value: 20,
-                    date: new Date(2017, 4, 4)
-                },  {
-                    value: 40,
-                    date: new Date(2017, 5, 5)
-                }
+            newState.gridData = data;
+            newState.issueTypes = issueTypes;
+            newState.typesSeries = visibleSeries;
+            newState.typesDistribution = [{
+                value: 10,
+                date: new Date(2017, 2, 1)
+            }, {
+                value: 30,
+                date: new Date(2017, 3, 3)
+            },  {
+                value: 20,
+                date: new Date(2017, 4, 4)
+            },  {
+                value: 40,
+                date: new Date(2017, 5, 5)
+            }
+
+            ];
+            newState.seriesColors = seriesColors;
+
+            // newState = {
+            //     gridData: data,
+            //     issueTypes,
+            //     typesSeries: visibleSeries,
+            //     typesDistribution: [{
+            //         value: 10,
+            //         date: new Date(2017, 2, 1)
+            //     }, {
+            //         value: 30,
+            //         date: new Date(2017, 3, 3)
+            //     },  {
+            //         value: 20,
+            //         date: new Date(2017, 4, 4)
+            //     },  {
+            //         value: 40,
+            //         date: new Date(2017, 5, 5)
+            //     }
     
-                ],
-                seriesColors
-            };
+            //     ],
+            //     seriesColors
+            // };
             
             return newState;
         default:

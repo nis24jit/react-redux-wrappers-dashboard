@@ -6,12 +6,16 @@ import IssuesContainer from '../Issues/IssuesContainer';
 import ChartsContainer from '../Charts/ChartsContainer';
 
 import { connect } from 'react-redux';
-import { issuesFetched, issuesProcessed } from './../../actions';
+import { issuesProcessed } from './../../actions';
 
 const baseUrl = 'https://api.github.com/repos/telerik/kendo-ui-core/issues';
 
 class Dashboard extends Component {
-    componentDidMount() {
+    componentDidMount(){
+        this.requestData();
+    }
+
+    requestData(period) {
         console.log("chart mounted");
         let headers = {
             // Generate your own token through
@@ -22,17 +26,22 @@ class Dashboard extends Component {
 
         let url = baseUrl + '?state=all&page=2&per_page=100';
 
-    //     this.props.dispatch(issuesFetched());
-
-        return fetch(url, { method: 'GET', accept: 'application/json', headers: headers })
+        fetch(url, { method: 'GET', accept: 'application/json', headers: headers })
             .then(response => response.json())
-            .then(json => this.props.dispatch(issuesProcessed(json)));
-     }
+            .then(json => this.props.dispatch(issuesProcessed(json, period)));
+    }
+
+    componentWillReceiveProps(newProps) {
+        console.log("props");
+        if (newProps.period.period !== this.props.period.period) {
+            console.log("true");
+            this.requestData(newProps.period.period);           
+        }
+    }
 
     render() {
         return (
             <div className="dashboard">
-                <h1>FOOOOOOOOOOOOO</h1>
                 <IssuesContainer />
                 <TabStrip value="All Issues">
                         <Tabs>
@@ -56,9 +65,9 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = (state) => {
-    debugger;
     return {
-        issues: state.issues
+        issues: state.issues,
+        period: state.period
     }
 }
 
