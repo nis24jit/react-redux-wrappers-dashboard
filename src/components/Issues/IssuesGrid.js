@@ -34,6 +34,7 @@ class IssuesGrid extends Component {
     detailInit = (dataItem) => {
         var data = dataItem.data;
 
+        /* eslint-disable */
         var detailTemplate = `
         <div>
         <div class="row my-4">
@@ -48,9 +49,9 @@ class IssuesGrid extends Component {
         <div class="row my-4">
             <div class="col-sm-2">
                 <span class="small d-block text-muted">Created on</span>
-                ${data.created_at}
+                ${kendo.toString(new Date(data.created_at), "MMM dd, yyyy")}
             </div>
-            ${data.closed_at ? '<div class="col-sm-2"><span className="small d-block text-muted">Closed on</span>' + data.closed_at + '</div>' : ''}
+            ${data.closed_at ? '<div class="col-sm-2"><span class="small d-block text-muted">Closed on</span>' + kendo.toString(new Date(data.closed_at), "MMM dd, yyyy") + '</div>' : ''}
             <div class="col-sm-2">
                 <span class="small d-block text-muted">Milestone</span>
                 ${data.milestone ? data.milestone.title : ''}
@@ -59,7 +60,7 @@ class IssuesGrid extends Component {
                 <span class="small d-block text-muted">Author</span>
                 ${data.user.login}
             </div>
-            ${data.assignee ? '<div class="col-sm-2"><span class="small d-block text-muted">Assignee</span><img src="' + data.assignee.avatar_url + '" style="width:30px; height:30px;}" class="img-circle" />' + data.assignee.login + '</div>' : ''}
+            ${data.assignee ? '<div class="col-sm-2"><span class="small d-block text-muted">Assignee</span><img src="' + data.assignee.avatar_url + '" style="width:30px; height:30px;}" class="img-circle" />&nbsp;' + data.assignee.login + '</div>' : ''}
         </div>
         <div class="row my-4">
             <div class="col-sm-2">
@@ -69,6 +70,7 @@ class IssuesGrid extends Component {
         </div>
     </div>
         `;
+        /* eslint-enable */
 
         dataItem.detailCell[0].innerHTML = detailTemplate;
     }
