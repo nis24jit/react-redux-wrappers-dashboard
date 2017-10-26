@@ -8,7 +8,9 @@ class ChartsContainer extends Component {
         return (
             <div className="row">
                 <div className="col-md-12">
-                    <ActiveIssues issues={this.props.issues} />
+                    <ActiveIssues activeIssues={this.props.issues.activeIssues}
+                     closedIssues={this.props.issues.closedIssues}
+                     openIssues={this.props.issues.openIssues}/>
                 </div>
                 <div className="col-md-4">
                     {<IssueTypes issues={this.props.issues.issueTypes} />}

@@ -14,6 +14,24 @@ export const issues = (state = initialState, action) => {
             }
             return newState;
         case 'ISSUES_PROCESSED':
+            let closedIssues = data.filter(issue => issue.state == "closed" ? true : false)
+            let datesClosed = [];
+            for (let i = 0 ; i < closedIssues.length; i++){
+                let newDate = new Date(closedIssues[i].closed_at).setHours(0, 0, 0, 0)
+                datesClosed.push({date:newDate, value: 1})
+            }
+
+            let opendIssues = data.filter(issue => issue.state == "open" ? true : false)
+            let datesOpen = [];
+            for (let i = 0 ; i < opendIssues.length; i++){
+                let newDate = new Date(opendIssues[i].created_at).setHours(0, 0, 0, 0)
+                datesOpen.push({date:newDate, value: 1})
+            }
+
+
+            let activeIssues = datesClosed.concat(datesOpen)
+
+
             let issueTypes = processor.groupLabels(data);
 
             let typesDistribution = processor.distribution(data);
@@ -42,6 +60,9 @@ export const issues = (state = initialState, action) => {
 
             newState = {
                 gridData: data,
+                closedIssues : datesClosed,
+                openIssues : datesOpen,
+                activeIssues: activeIssues,
                 issueTypes,
                 typesSeries: visibleSeries,
                 typesDistribution: [{

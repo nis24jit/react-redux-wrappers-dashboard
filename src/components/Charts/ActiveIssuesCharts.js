@@ -4,24 +4,23 @@ import {Chart} from '@progress/kendo-charts-react-wrapper';
 class ActiveIssues extends Component {
     constructor(props) {
         super(props);
-
         this.activeIssuesOptions = {
-            height: "80px",
-            series: {
+           chartArea: {
+            height: 80
+           },
+           series: [{
                 type: "column",
-                stack: true,
                 gap: 0.5,
                 overlay: false,
-                color: "#888",
-                field: "count",
+                stack:true,
+                color: "rgb(136, 136, 136)",
+                field: "value",
                 categoryField: "date",
-                aggregate: "count"
-            },
+                aggregate :"count"
+            }],
             categoryAxis: [{
-                baseUnit: "baseUnit",
-                majorTicks: {
-                    visible: false
-                },
+                type:"date",
+                baseUnit: "weeks",
                 labels:{
                     step: 4,
                     skip: 2,
@@ -43,11 +42,77 @@ class ActiveIssues extends Component {
         }
 
         this.closedIssuesOptions = {
-
+           chartArea: {
+            height: 80
+           },
+           series: [{
+                type: "column",
+                gap: 0.5,
+                overlay: false,
+                stack:true,
+                color: "#27c46d",
+                field: "value",
+                categoryField: "date",
+                aggregate :"count"
+            }],
+            categoryAxis: [{
+                type:"date",
+                baseUnit: "weeks",
+                labels:{
+                    step: 4,
+                    skip: 2,
+                    font: '10px sans-serif'
+                },
+                majorGridLines: {
+                    visible: false
+                },
+                line: {
+                    visible: false
+                },
+            }],
+            valueAxis: {
+                visible: false,
+                majorGridLines: {
+                    visible: false
+                },
+            }
         }
 
         this.openIssuesOptions = {
-
+           chartArea: {
+            height: 80
+           },
+           series: [{
+                type: "column",
+                gap: 0.5,
+                overlay: false,
+                stack:true,
+                color: "#CF3268",
+                field: "value",
+                categoryField: "date",
+                aggregate :"count"
+            }],
+            categoryAxis: [{
+                type:"date",
+                baseUnit: "weeks",
+                labels:{
+                    step: 4,
+                    skip: 2,
+                    font: '10px sans-serif'
+                },
+                majorGridLines: {
+                    visible: false
+                },
+                line: {
+                    visible: false
+                },
+            }],
+            valueAxis: {
+                visible: false,
+                majorGridLines: {
+                    visible: false
+                },
+            }
         }
 
         this.closeRateOptions = {
@@ -83,7 +148,23 @@ class ActiveIssues extends Component {
     }
 
     render() {
+        
+        let countActive = ""
+        let countClosed = ""
+        let countOpen = ""
+        if(this.props.activeIssues != undefined){
+            countActive = this.props.activeIssues.length
+        }
+        if(this.props.closedIssues != undefined){
+            countClosed = this.props.closedIssues.length
+        }
+        if(this.props.openIssues != undefined){
+            countOpen = this.props.openIssues.length
+        }
+                    
         return (
+            /* eslint-disable */
+
             <div className="card">
             <h3 className="card-header">Active Issues</h3>
             <div className="card-block">
@@ -91,26 +172,26 @@ class ActiveIssues extends Component {
 
                     <div className="col-sm-12 col-md-6 col-lg active-issues">
                         <span className="comp-label">
-                            <strong>[Active CLOSE]</strong>
+                          <strong>{countActive}</strong>
                             <small>Active issues</small>
                         </span>
-                        <div>chart</div>
+                        <Chart dataSource={new kendo.data.DataSource({data: this.props.activeIssues})} {...this.activeIssuesOptions} ></Chart>
                     </div>
 
                     <div className="col-sm-12 col-md-6 col-lg text-success closed-issues">
                         <span className="comp-label">
-                            <strong>[CLOSED ISSUES]</strong>
+                            <strong>{countClosed}</strong>
                             <small>Closed issues</small>
                         </span>
-                        <div>chart</div>
+                        <Chart dataSource={new kendo.data.DataSource({data: this.props.closedIssues})} {...this.closedIssuesOptions} ></Chart>
                     </div>
 
                     <div className="col-sm-12 col-md-6 col-lg text-danger open-issues">
                         <span className="comp-label">
-                            <strong>[OPEN ISSUES]</strong>
+                            <strong>{countOpen}</strong>
                             <small>Open issues</small>
                         </span>
-                        <div>chart</div>
+                        <Chart dataSource={new kendo.data.DataSource({data: this.props.openIssues})} {...this.openIssuesOptions} ></Chart>
                     </div>
 
                     <div className="col-sm-12 col-md-6 col-lg close-rate">
