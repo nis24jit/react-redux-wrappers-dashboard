@@ -14,28 +14,34 @@ export const issues = (state = initialState, action) => {
             }
             return newState;
         case 'ISSUES_PROCESSED':
+            let allIssues = [];
+            
+            if (data instanceof Array && data.length > 0) {
+                allIssues= processor.process(data, 7);
+            }
+
             let closedIssues = data.filter(issue => issue.state == "closed" ? true : false)
             let datesClosed = [];
+            
             for (let i = 0 ; i < closedIssues.length; i++){
                 let newDate = new Date(closedIssues[i].closed_at).setHours(0, 0, 0, 0)
                 datesClosed.push({date:newDate, value: 1})
             }
 
-            let opendIssues = data.filter(issue => issue.state == "open" ? true : false)
+            let opendIssues = data.filter(issue => issue.state == "open" ? true : false);
             let datesOpen = [];
             for (let i = 0 ; i < opendIssues.length; i++){
                 let newDate = new Date(opendIssues[i].created_at).setHours(0, 0, 0, 0)
                 datesOpen.push({date:newDate, value: 1})
             }
 
-
             let activeIssues = datesClosed.concat(datesOpen)
-
 
             let issueTypes = processor.groupLabels(data);
 
-            let typesDistribution = processor.distribution(data);
+            let typesDistribution = allIssues.typesDistribution;
 
+            debugger;
             let seriesColors = [
                 { label: "SEV: Low", value: "#FF9966", active: false },
                 { label: "SEV: Medium", value: "#BB6ACB", active: false },
@@ -45,24 +51,9 @@ export const issues = (state = initialState, action) => {
                 { label: "Others", value: "#2BA7DA", active: false }
             ];
 
-            const newSeries = {
-                color: seriesColors[0].value,
-                markers: { visible: false },
-                data: { label: "SEV: Low", value: '#FF9966', active: false }
-            };
+            let closeRate = allIssues.closeRate;
 
-            // let visibleSeries = [{
-            //     markers: { visible: false },
-            //     color: seriesColors[0].value,
-            //     categoryField: "date",
-            //     field: "value1"
-            // },
-            // {
-            //     markers: { visible: false },
-            //     color: seriesColors[1].value,
-            //     categoryField: "date",
-            //     field: "value2"
-            // }]
+            let closeRateIssues = [{"target": 70, "current": Math.round(closeRate.average * 100)}];
 
             let visibleSeries=[];
 
@@ -77,37 +68,11 @@ export const issues = (state = initialState, action) => {
                 );
             }
 
-
-            // visibleSeries.push(
-            //     {
-            //         markers: { visible: false },
-            //         categoryField: "date",
-            //         name: "Enhancement",
-            //         data: typesDistribution["Enhancement"]
-            //     }
-            // );
-
-            // visibleSeries.push(
-            //     {
-            //         markers: { visible: false },
-            //         categoryField: "date",
-            //         name: "Feature",
-            //         data: typesDistribution["Feature"]
-            //     }
-            // );
-            // visibleSeries.push(
-            //     {
-            //         markers: { visible: false },
-            //         categoryField: "date",
-            //         name: "Others",
-            //         data: typesDistribution["Others"]
-            //     }
-            // );
-
-            debugger;
             newState = {
                 gridData: data,
-                closedIssues : datesClosed,
+                closedIssues: datesClosed,
+                closeRateIssues,
+                closeRate,
                 openIssues : datesOpen,
                 activeIssues: activeIssues,
                 issueTypes,

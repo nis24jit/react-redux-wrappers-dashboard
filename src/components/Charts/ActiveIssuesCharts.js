@@ -144,31 +144,69 @@ class ActiveIssues extends Component {
         }
 
         this.allIssuesOptions = {
-
+            seriesDefaults: {
+                type: "column",
+                stack: true,
+                gap: 0.06,
+                overlay: false
+            },
+            series: [{
+                opacity: 0.3,
+                border: {
+                    color: '#35C473', 
+                    opacity: 0.3
+                },
+                color: "#35C473",
+                field: "count",
+                categoryField: "date",
+                aggregate: "count"
+            },{
+                opacity: 0.3,
+                border: {
+                    color: '#CC3458', 
+                    opacity: 0.3
+                },
+                color: "#CC3458",
+                field: "count",
+                categoryField: "date",
+                aggregate: "count"
+            }],
+            categoryAxis: {
+                baseUnit: "weeks",
+                majorTicks: {
+                    visible: false
+                },
+                line: {
+                    visible: false
+                },
+                majorGridLines: {
+                    visible: false
+                },
+                labels: {
+                    rotation: "auto",
+                    margin: {
+                        top: 8
+                    }
+                }
+            },
+            valueAxis: {
+                line: {
+                    visible: false
+                },
+                labels: {
+                    step: 2, 
+                    skip: 2, 
+                    margin: { 
+                        right: 4 
+                    },
+                    majorGridLines: {
+                        step: 2, 
+                        skip: 2, 
+                        color: '#F0F2F2'
+                    }
+                }
+            }
         }
-
-          //<div className="card">
-          //  <h3 className="card-header">Active Issues</h3>
-          //  <div className="card-block">
-
-          //          <div className="row">
-
-          //              <div className="col-sm-12 col-md-6 col-lg active-issues">
-          //                  <span className="comp-label">
-
-          //                      <small>Active issues</small>
-          //                  </span>
-          //                  <Chart {...this.activeIssuesOptions} />
-          //              </div>
-
-
-
-          //          <h3>All issues</h3>
-          //          <div>chart</div>
-
-          //      </div>
-          //  </div>
-          //  </div>
     }
 
     render() {
@@ -187,8 +225,8 @@ class ActiveIssues extends Component {
         if(this.props.openIssues != undefined){
             countOpen = this.props.openIssues.length
         }
-        if(this.props.closeRateIssues != undefined){
-            closeRate = this.props.closeRateIssues[0].current + " %"
+        if(this.props.closeRate != undefined){
+           closeRate = this.props.closeRate;
         }
                     
         return (
@@ -225,25 +263,27 @@ class ActiveIssues extends Component {
 
                     <div className="col-sm-12 col-md-6 col-lg close-rate">
                         <span className="comp-label">
-                            <strong>{closeRate}</strong>
+                            <strong>{closeRate?Math.round(closeRate.average*100) + " %":""}</strong>
                             <small>Close rate</small>
                         </span>
                         <p className="m-0 small text-uppercase text-muted">
-                            Highest:
-                            [RATE]
-                            on [DATE]
+                            Highest: 
+                            {closeRate?Math.round(closeRate.highest.close_rate * 100) + " % ":""}
+                            on {closeRate? kendo.toString(new Date(Date(closeRate.highest.created_at)), "MMM dd, yyyy"):""}
                         </p>
                         <p className="m-0 small text-uppercase text-muted">
-                            Lowest:
-                            [LOWEST]
-                            on [DATE]
+                            Lowest: 
+                            {closeRate?Math.round(closeRate.lowest.close_rate * 100) + " % ":""}
+                            on {closeRate? kendo.toString(new Date(Date(closeRate.lowest.created_at)), "MMM dd, yyyy"):""}
                         </p>
                         <Chart dataSource={this.props.closeRateIssues} {...this.closeRateOptions}></Chart>
                     </div>
                 </div>
 
                 <h3>All issues</h3>
-                <div>chart</div>
+                <div>
+                    <Chart {...this.allIssuesOptions} />
+                </div>
 
             </div>
         </div>

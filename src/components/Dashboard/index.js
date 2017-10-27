@@ -34,22 +34,7 @@ class Dashboard extends Component {
             <div className="dashboard">
                 <h1>FOOOOOOOOOOOOO</h1>
                 <IssuesContainer />
-                <TabStrip value="All Issues">
-                        <Tabs>
-                            <Tab ref={this.selectTab}>All Issues</Tab>
-                            <Tab>Assigned to Me</Tab>
-                            <Tab>Created by Me</Tab>
-                        </Tabs>
-                        <Content>
-                            <ChartsContainer issues={this.props.issues} />
-                        </Content>
-                        <Content>
-                            <ChartsContainer issues={this.props.issues} />
-                        </Content>
-                        <Content>
-                            <ChartsContainer issues={this.props.issues} />
-                        </Content>
-                </TabStrip>
+                <ChartsContainer issues={this.props.issues} />
             </div>
         );
     }

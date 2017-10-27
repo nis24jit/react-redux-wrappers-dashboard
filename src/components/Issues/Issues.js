@@ -5,9 +5,9 @@ import { ButtonGroup, ButtonGroupItem as Button } from '@progress/kendo-buttons-
 class Issues extends Component {
     changePeriod = (e) => {
        let indexToPeriod = {
-           0: 3,
-           1: 6,
-           2: 12
+           0: 7,
+           1: 14,
+           2: 30
        }
        this.props.onPeriodChange(indexToPeriod[e.index])
     }
@@ -24,9 +24,9 @@ class Issues extends Component {
                     </div>
                     <div className="col-sm text-sm-right">
                         <ButtonGroup select={this.changePeriod}>
-                            <Button>3 Months</Button>
-                            <Button>6 Months</Button>
-                            <Button>12 Months</Button>
+                            <Button>1 Week</Button>
+                            <Button>2 Weeks</Button>
+                            <Button>1 Month</Button>
                         </ButtonGroup>
                     </div>
                 </div>

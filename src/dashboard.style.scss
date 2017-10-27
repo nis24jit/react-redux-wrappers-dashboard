@@ -270,6 +270,7 @@ main {
 // Issues
 .issues {
 	display: block;
+	
 
 
 	.badge {
@@ -285,6 +286,7 @@ main {
 		vertical-align: middle;
 		width: 16px;
 		height: 16px;
+		margin-right: 5px;
 	}
 	.issue-open { background-image: url( "assets/issue-open.png" ) }
 	.issue-closed { background-image: url( "assets/issue-closed.png" ) }

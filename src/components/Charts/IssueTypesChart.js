@@ -61,13 +61,13 @@ class IssueTypes extends Component {
             <div className="card issue-types">
                 <h4 className="card-header">Issue Types</h4>
                 <div className="card-block">
-                    <Chart dataSource={new kendo.data.DataSource({ data: this.props.issues })} {...this.options}></Chart>
+                    <Chart dataSource={this.props.issues} {...this.options}></Chart>
 
                     <div className="comp-label chart-label" style={{ color: this.hoverColor }}>
-                        {/* <strong>{this.state?this.state.donutPercent:this.donutPercent}</strong>
-                        <small>{this.state?this.state.donutLabel:this.donutLabel}</small> */}
-                        <strong>{this.donutPercent}</strong>
-                        <small>{this.donutLabel}</small>
+                        <strong>{this.state?this.state.donutPercent:this.donutPercent}</strong>
+                        <small>{this.state?this.state.donutLabel:this.donutLabel}</small>
+                        {/* <strong>{this.donutPercent}</strong>
+                        <small>{this.donutLabel}</small> */}
                     </div>
                 </div>
             </div>
@@ -85,11 +85,11 @@ class IssueTypes extends Component {
         this.donutPercent = Math.round(series.value * 100 || 0) + '%';
         this.donutLabel = series.category;
         
-        // this.setState({
-        //     hoverColor: series.point.options.color,
-        //     donutPercent: Math.round(series.value * 100 || 0) + '%',
-        //     donutLabel: series.category,
-        // });
+        this.setState({
+            hoverColor: series.point.options.color,
+            donutPercent: Math.round(series.value * 100 || 0) + '%',
+            donutLabel: series.category,
+        });
     }
 }
 

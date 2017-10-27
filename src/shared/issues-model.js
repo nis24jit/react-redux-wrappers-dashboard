@@ -1,5 +1,3 @@
-"use strict";
-
 export class IssuesModel {
     constructor(
         active = [],
@@ -28,7 +26,15 @@ export class IssuesModel {
                 created_at: new Date().toISOString()
             },
             average: 0
-        }) { }
+        }) {
+            this.active = active
+            this.open = open
+            this.closed = closed
+            this.groupedIssues = groupedIssues
+            this.issueTypes = issueTypes
+            this.typesDistribution = typesDistribution
+            this.closeRate = closeRate
+         }
 }
 
 export class Label {
