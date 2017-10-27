@@ -23,6 +23,8 @@ class MainMenu extends Component {
                 {
                     this.state.showNav ?
                     <div id="nav" className="col-xs-3 bg-inverse text-white py-5 k-vbox">
+                        <h1 id="app-title">Issues</h1>
+                        <p id="app-subtitle">Sample Dashboard</p>
                         <p className="h4 mt-5">Project</p>
                         <ul className="nav nav-pills flex-column">
                             <li className="nav-item" id="dashbaord">

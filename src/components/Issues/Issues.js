@@ -23,7 +23,7 @@ class Issues extends Component {
                         </h2>
                     </div>
                     <div className="col-sm text-sm-right">
-                        <ButtonGroup select={this.changePeriod}>
+                        <ButtonGroup select={this.changePeriod} index={0}>
                             <Button>1 Month</Button>
                             <Button>2 Weeks</Button>
                             <Button>1 Week</Button>

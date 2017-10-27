@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Grid, GridColumn } from '@progress/kendo-grid-react-wrapper';
 
+import marked from 'marked';
+
 class IssuesGrid extends Component {
     constructor(props) {
         super(props);
@@ -35,7 +37,7 @@ class IssuesGrid extends Component {
     
     detailInit = (dataItem) => {
         var data = dataItem.data;
-
+        debugger;
         var detailTemplate = `
         <div>
         <div class="row my-4">
@@ -68,6 +70,10 @@ class IssuesGrid extends Component {
                 <h4 class="small text-muted">Labels</h4>
                 ${data.labels.map((label, index) => { return '<span class="badge" style=\'background-color: #' + label.color + '\'>' + label.name + '</span>' })}
             </div>
+            <div class="col-sm-8">
+            <h4 class="small text-muted">Description</h4>
+            ${marked(data.body)}
+        </div>
         </div>
     </div>
         `;
@@ -78,11 +84,13 @@ class IssuesGrid extends Component {
     render() {
         return(
             /* eslint-disable */
+            <div className="issues">
             <Grid dataSource={new kendo.data.DataSource({data: this.props.issues, pageSize: 10})}
                 {...this.options} 
                 detailInit={this.detailInit}>
                 {this.columns}
             </Grid>
+            </div>
             /* eslint-enable */
         );
     }
