@@ -5,10 +5,14 @@ var initialState = [
 
 export const issues = (state = initialState, action) => {
     let newState = {};
+    
     let data = action.payload;
+    let period = action.period ? action.period : 7;
 
     switch (action.type) {
         case 'ISSUES_RECEIVED':
+            data = processor.filterByDays(data, period);
+            
             newState = {
                 gridData: data.filter(issue => issue.pull_request ? false : true)
             }
@@ -17,8 +21,10 @@ export const issues = (state = initialState, action) => {
             let allIssues = [];
             
             if (data instanceof Array && data.length > 0) {
-                allIssues= processor.process(data, 7);
+                allIssues= processor.process(data, period);
             }
+
+            data = processor.filterByDays(data, period);
 
             let closedIssues = data.filter(issue => issue.state == "closed" ? true : false)
             let datesClosed = [];
