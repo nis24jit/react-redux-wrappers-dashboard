@@ -3,6 +3,7 @@ import { Link, Route } from 'react-router-dom';
 
 import Dashboard from './../Dashboard';
 import IssuesIndex from './../Issues';
+import Profile from './../Profile';
 import Signin from './../Signin';
 
 class MainMenu extends Component {
@@ -22,6 +23,8 @@ class MainMenu extends Component {
                 {
                     this.state.showNav ?
                     <div id="nav" className="col-xs-3 bg-inverse text-white py-5 k-vbox">
+                        <h1 id="app-title">Issues</h1>
+                        <p id="app-subtitle">Sample Dashboard</p>
                         <p className="h4 mt-5">Project</p>
                         <ul className="nav nav-pills flex-column">
                             <li className="nav-item" id="dashbaord">
@@ -48,9 +51,12 @@ class MainMenu extends Component {
                     </div >
                     : null
                 }
-                <div className="col-xs p-4 py-5">
+
+                <div className="col-xs p-4 py-5"> 
+                    <Route path="/" exact component={Dashboard}/>
                     <Route path="/dashboard" component={Dashboard}/>
                     <Route path="/issues" component={IssuesIndex}/>
+                    <Route path="/profile" component={Profile}/>
                     <Route path="/signin" component={Signin}/>
                  </div>
             </div>

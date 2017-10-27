@@ -5,16 +5,31 @@ export const periodChanged = (period) => {
     }
 };
 
-export const issuesReceived = (issues) => {
-    console.log('issues received');
+export const issuesReceived = (issues, period) => {
     return {
         type: 'ISSUES_RECEIVED',
-        payload: issues
+        payload: issues,
+        period
     }
 }
 
 export const issuesFetched = () => {
     return {
         type: 'ISSUES_FETCHED'
+    }
+}
+
+export const issuesProcessed = (issues, period) => {
+    return {
+        type: 'ISSUES_PROCESSED',
+        payload: issues,
+        period
+    }
+}
+
+export const userRetrieved = (user) => {
+    return {
+        type: 'USER_RETRIEVED',
+        payload: user
     }
 }
