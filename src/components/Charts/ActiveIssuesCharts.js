@@ -116,7 +116,31 @@ class ActiveIssues extends Component {
         }
 
         this.closeRateOptions = {
-
+            chartArea: {
+                margin: -20,
+                height: 20
+              }, 
+              series: [{
+                type: "bullet",
+                  target: {
+                      color: "#fff"
+                  },
+                  currentField: "current",
+                  targetField: "target",
+                  color: "#cc3458"
+                  
+              }], 
+              valueAxis: [{
+                  plotBands: [{
+                      from: 0, 
+                      to: 100, 
+                      color: '#35C473'
+                  }],
+                  visible: false,
+                  majorGridLines: {
+                      visible: false
+                  }
+              }]
         }
 
         this.allIssuesOptions = {
@@ -152,6 +176,8 @@ class ActiveIssues extends Component {
         let countActive = ""
         let countClosed = ""
         let countOpen = ""
+        let closeRate = ""
+
         if(this.props.activeIssues != undefined){
             countActive = this.props.activeIssues.length
         }
@@ -160,6 +186,9 @@ class ActiveIssues extends Component {
         }
         if(this.props.openIssues != undefined){
             countOpen = this.props.openIssues.length
+        }
+        if(this.props.closeRateIssues != undefined){
+            closeRate = this.props.closeRateIssues[0].current + " %"
         }
                     
         return (
@@ -175,7 +204,7 @@ class ActiveIssues extends Component {
                           <strong>{countActive}</strong>
                             <small>Active issues</small>
                         </span>
-                        <Chart dataSource={new kendo.data.DataSource({data: this.props.activeIssues})} {...this.activeIssuesOptions} ></Chart>
+                        <Chart dataSource={this.props.activeIssues} {...this.activeIssuesOptions} ></Chart>
                     </div>
 
                     <div className="col-sm-12 col-md-6 col-lg text-success closed-issues">
@@ -183,7 +212,7 @@ class ActiveIssues extends Component {
                             <strong>{countClosed}</strong>
                             <small>Closed issues</small>
                         </span>
-                        <Chart dataSource={new kendo.data.DataSource({data: this.props.closedIssues})} {...this.closedIssuesOptions} ></Chart>
+                        <Chart dataSource={this.props.closedIssues} {...this.closedIssuesOptions} ></Chart>
                     </div>
 
                     <div className="col-sm-12 col-md-6 col-lg text-danger open-issues">
@@ -191,12 +220,12 @@ class ActiveIssues extends Component {
                             <strong>{countOpen}</strong>
                             <small>Open issues</small>
                         </span>
-                        <Chart dataSource={new kendo.data.DataSource({data: this.props.openIssues})} {...this.openIssuesOptions} ></Chart>
+                        <Chart dataSource={this.props.openIssues} {...this.openIssuesOptions} ></Chart>
                     </div>
 
                     <div className="col-sm-12 col-md-6 col-lg close-rate">
                         <span className="comp-label">
-                            <strong>[ISSUES CLOSED RATE]</strong>
+                            <strong>{closeRate}</strong>
                             <small>Close rate</small>
                         </span>
                         <p className="m-0 small text-uppercase text-muted">
@@ -209,7 +238,7 @@ class ActiveIssues extends Component {
                             [LOWEST]
                             on [DATE]
                         </p>
-                        <div>chart</div>
+                        <Chart dataSource={this.props.closeRateIssues} {...this.closeRateOptions}></Chart>
                     </div>
                 </div>
 

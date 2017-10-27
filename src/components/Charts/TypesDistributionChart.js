@@ -122,12 +122,10 @@ class TypesDistribution extends Component {
             <div className="card">
                 <h4 className="card-header">Types Distribution</h4>
                 <div className="row card-block small">
-
-
                     {
-                        this.seriesColors.map((item) => {
+                        this.seriesColors.map((item, index) => {
                             return (
-                                <a className="col-xs-4 col-sm-3 col-md comp-label">
+                                <a key={index} className="col-xs-4 col-sm-3 col-md comp-label">
                                     <strong>item.label</strong>
                                     <small>item.label</small>
                                 </a>
@@ -137,7 +135,7 @@ class TypesDistribution extends Component {
                 </div>
                 <div className="card-block">
                      <Chart
-                        dataSource={new kendo.data.DataSource({data: this.props.types.typesDistribution})}
+                        
                         series={this.props.types.typesSeries}
                         {...this.options}
                     />

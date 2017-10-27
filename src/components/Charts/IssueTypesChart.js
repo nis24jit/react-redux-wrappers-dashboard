@@ -64,6 +64,8 @@ class IssueTypes extends Component {
                     <Chart dataSource={new kendo.data.DataSource({ data: this.props.issues })} {...this.options}></Chart>
 
                     <div className="comp-label chart-label" style={{ color: this.hoverColor }}>
+                        {/* <strong>{this.state?this.state.donutPercent:this.donutPercent}</strong>
+                        <small>{this.state?this.state.donutLabel:this.donutLabel}</small> */}
                         <strong>{this.donutPercent}</strong>
                         <small>{this.donutLabel}</small>
                     </div>
@@ -74,6 +76,7 @@ class IssueTypes extends Component {
     }
 
     onHover(event) {
+
         this.setDonutLegend(event);
     };
 
@@ -81,6 +84,12 @@ class IssueTypes extends Component {
         this.hoverColor = series.point.options.color;
         this.donutPercent = Math.round(series.value * 100 || 0) + '%';
         this.donutLabel = series.category;
+        
+        // this.setState({
+        //     hoverColor: series.point.options.color,
+        //     donutPercent: Math.round(series.value * 100 || 0) + '%',
+        //     donutLabel: series.category,
+        // });
     }
 }
 

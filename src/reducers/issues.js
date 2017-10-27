@@ -45,19 +45,66 @@ export const issues = (state = initialState, action) => {
                 { label: "Others", value: "#2BA7DA", active: false }
             ];
 
-            let visibleSeries = [{
-                markers: { visible: false },
+            const newSeries = {
                 color: seriesColors[0].value,
-                categoryField: "date",
-                field: "value"
-            },
-            {
                 markers: { visible: false },
-                color: seriesColors[1].value,
-                categoryField: "date",
-                field: "value"
-            }]
+                data: { label: "SEV: Low", value: '#FF9966', active: false }
+            };
 
+            // let visibleSeries = [{
+            //     markers: { visible: false },
+            //     color: seriesColors[0].value,
+            //     categoryField: "date",
+            //     field: "value1"
+            // },
+            // {
+            //     markers: { visible: false },
+            //     color: seriesColors[1].value,
+            //     categoryField: "date",
+            //     field: "value2"
+            // }]
+
+            let visibleSeries=[];
+
+            for (let item in typesDistribution) {
+                visibleSeries.push(
+                    {
+                        markers: { visible: false },
+                        categoryField: "date",
+                        name: item,
+                        data: typesDistribution[item]
+                    }
+                );
+            }
+
+
+            // visibleSeries.push(
+            //     {
+            //         markers: { visible: false },
+            //         categoryField: "date",
+            //         name: "Enhancement",
+            //         data: typesDistribution["Enhancement"]
+            //     }
+            // );
+
+            // visibleSeries.push(
+            //     {
+            //         markers: { visible: false },
+            //         categoryField: "date",
+            //         name: "Feature",
+            //         data: typesDistribution["Feature"]
+            //     }
+            // );
+            // visibleSeries.push(
+            //     {
+            //         markers: { visible: false },
+            //         categoryField: "date",
+            //         name: "Others",
+            //         data: typesDistribution["Others"]
+            //     }
+            // );
+
+            debugger;
             newState = {
                 gridData: data,
                 closedIssues : datesClosed,
@@ -65,22 +112,7 @@ export const issues = (state = initialState, action) => {
                 activeIssues: activeIssues,
                 issueTypes,
                 typesSeries: visibleSeries,
-                typesDistribution: [{
-                    value: 10,
-                    date: new Date(2017, 2, 1)
-                }, {
-                    value: 30,
-                    date: new Date(2017, 3, 3)
-                },  {
-                    value: 20,
-                    date: new Date(2017, 4, 4)
-                },  {
-                    value: 40,
-                    date: new Date(2017, 5, 5)
-                }
-
-                ],
-                seriesColors
+                seriesColors: seriesColors
             };
 
             return newState;
