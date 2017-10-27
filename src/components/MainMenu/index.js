@@ -51,6 +51,7 @@ class MainMenu extends Component {
                 }
 
                 <div className="col-xs p-4 py-5"> 
+                    <Route path="/" exact component={Dashboard}/>
                     <Route path="/dashboard" component={Dashboard}/>
                     <Route path="/issues" component={IssuesIndex}/>
                     <Route path="/profile" component={Profile}/>
