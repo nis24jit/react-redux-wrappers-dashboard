@@ -24,9 +24,9 @@ class Issues extends Component {
                     </div>
                     <div className="col-sm text-sm-right">
                         <ButtonGroup select={this.changePeriod}>
-                            <Button>1 Week</Button>
-                            <Button>2 Weeks</Button>
                             <Button>1 Month</Button>
+                            <Button>2 Weeks</Button>
+                            <Button>1 Week</Button>
                         </ButtonGroup>
                     </div>
                 </div>

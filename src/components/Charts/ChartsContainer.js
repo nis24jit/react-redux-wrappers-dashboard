@@ -13,7 +13,8 @@ class ChartsContainer extends Component {
                         closedIssues={this.props.issues.closedIssues}
                         openIssues={this.props.issues.openIssues}
                         closeRateIssues={this.props.issues.closeRateIssues}
-                        closeRate={this.props.issues.closeRate} />
+                        closeRate={this.props.issues.closeRate}
+                        groupedIssues={this.props.issues.groupedIssues} />
                 </div>
                 <div className="col-md-4">
                     {<IssueTypes issues={this.props.issues.issueTypes} />}

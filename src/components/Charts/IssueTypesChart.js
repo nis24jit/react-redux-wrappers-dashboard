@@ -44,20 +44,8 @@ class IssueTypes extends Component {
         });
     }
 
-//<issue-types class="card issue-types">
-//        <h4 class="card-header">Issue Types</h4>
-//        <div class="card-block">
-
-//            <div class="comp-label chart-label" style="color: rgb(91, 192, 222);">
-//                <strong>25%</strong>
-//                <small>SEV: MEDIUM</small>
-//            </div>
-//        </div>
-//    </issue-types>
-
     render() {
         return (
-             /* eslint-disable */
             <div className="card issue-types">
                 <h4 className="card-header">Issue Types</h4>
                 <div className="card-block">
@@ -66,12 +54,9 @@ class IssueTypes extends Component {
                     <div className="comp-label chart-label" style={{ color: this.hoverColor }}>
                         <strong>{this.state?this.state.donutPercent:this.donutPercent}</strong>
                         <small>{this.state?this.state.donutLabel:this.donutLabel}</small>
-                        {/* <strong>{this.donutPercent}</strong>
-                        <small>{this.donutLabel}</small> */}
                     </div>
                 </div>
             </div>
-            /* eslint-enable */
         );
     }
 

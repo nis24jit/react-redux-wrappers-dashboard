@@ -14,13 +14,13 @@ class ActiveIssues extends Component {
                 overlay: false,
                 stack:true,
                 color: "rgb(136, 136, 136)",
-                field: "value",
+                field: "count",
                 categoryField: "date",
                 aggregate :"count"
             }],
             categoryAxis: [{
                 type:"date",
-                baseUnit: "weeks",
+                baseUnit: "days",
                 labels:{
                     step: 4,
                     skip: 2,
@@ -51,13 +51,13 @@ class ActiveIssues extends Component {
                 overlay: false,
                 stack:true,
                 color: "#27c46d",
-                field: "value",
+                field: "count",
                 categoryField: "date",
                 aggregate :"count"
             }],
             categoryAxis: [{
                 type:"date",
-                baseUnit: "weeks",
+                baseUnit: "days",
                 labels:{
                     step: 4,
                     skip: 2,
@@ -88,13 +88,13 @@ class ActiveIssues extends Component {
                 overlay: false,
                 stack:true,
                 color: "#CF3268",
-                field: "value",
+                field: "count",
                 categoryField: "date",
                 aggregate :"count"
             }],
             categoryAxis: [{
                 type:"date",
-                baseUnit: "weeks",
+                baseUnit: "days",
                 labels:{
                     step: 4,
                     skip: 2,
@@ -172,7 +172,7 @@ class ActiveIssues extends Component {
                 aggregate: "count"
             }],
             categoryAxis: {
-                baseUnit: "weeks",
+                baseUnit: "days",
                 majorTicks: {
                     visible: false
                 },
@@ -216,6 +216,8 @@ class ActiveIssues extends Component {
         let countOpen = ""
         let closeRate = ""
 
+        let groupedIssues = "";
+
         if(this.props.activeIssues != undefined){
             countActive = this.props.activeIssues.length
         }
@@ -228,10 +230,13 @@ class ActiveIssues extends Component {
         if(this.props.closeRate != undefined){
            closeRate = this.props.closeRate;
         }
-                    
+        
+        if (this.props.groupedIssues != undefined) {
+            groupedIssues = this.props.groupedIssues;
+        }
+
         return (
             /* eslint-disable */
-
             <div className="card">
             <h3 className="card-header">Active Issues</h3>
             <div className="card-block">
@@ -282,11 +287,12 @@ class ActiveIssues extends Component {
 
                 <h3>All issues</h3>
                 <div>
-                    <Chart {...this.allIssuesOptions} />
+                    <Chart dataSource={{data: this.props.groupedIssues}} {...this.allIssuesOptions} />
                 </div>
 
             </div>
         </div>
+        /* eslint-enable */
         )
     }
 }

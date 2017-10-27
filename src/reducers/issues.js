@@ -69,6 +69,8 @@ export const issues = (state = initialState, action) => {
                         markers: { visible: false },
                         categoryField: "date",
                         name: item,
+                        aggregate: "count",
+                        style: "smooth",
                         data: typesDistribution[item]
                     }
                 );
@@ -76,14 +78,15 @@ export const issues = (state = initialState, action) => {
 
             newState = {
                 gridData: data,
-                closedIssues: datesClosed,
+                closedIssues: allIssues.groupedIssues.closed,
                 closeRateIssues,
                 closeRate,
-                openIssues : datesOpen,
-                activeIssues: activeIssues,
+                openIssues : allIssues.groupedIssues.open,
+                activeIssues: allIssues.active,
                 issueTypes,
                 typesSeries: visibleSeries,
-                seriesColors: seriesColors
+                seriesColors: seriesColors,
+                groupedIssues: allIssues.active
             };
 
             return newState;
