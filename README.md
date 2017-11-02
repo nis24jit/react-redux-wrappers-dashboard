@@ -13,3 +13,7 @@ The following repository contains sample application showing multiple Kendo UI W
  This will launch the example at http://localhost:3000
  
  Live at https://telerik.github.io/react-redux-wrappers-dashboard/
+ 
+ ## Deploy to GH Pages
+ 
+ `npm run deploy` on master branch.
