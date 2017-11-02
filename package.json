@@ -1,6 +1,7 @@
 {
   "name": "react-redux-wrappers-dashboard",
   "version": "0.1.0",
+  "homepage": "https://telerik.github.io/react-redux-wrappers-dashboard/",
   "private": true,
   "dependencies": {
     "@progress/kendo-buttons-react-wrapper": "^2017.3.1026",
@@ -11,6 +12,7 @@
     "@progress/kendo-theme-bootstrap": "^2.8.3",
     "@progress/kendo-ui": "^2017.3.1026",
     "bootstrap": "git://github.com/twbs/bootstrap.git#95f37e4c402df37db16781995ffa1592032df9c8",
+    "gh-pages": "^1.0.0",
     "marked": "^0.3.6",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
@@ -61,6 +63,8 @@
     "sass-loader": "^6.0.3"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
