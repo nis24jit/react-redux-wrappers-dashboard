@@ -5,13 +5,14 @@
   "private": true,
   "dependencies": {
     "@progress/kendo-buttons-react-wrapper": "^2017.3.1026",
+    "@progress/kendo-charts-react-wrapper": "^2017.3.1026",
     "@progress/kendo-grid-react-wrapper": "^2017.3.1026",
     "@progress/kendo-inputs-react-wrapper": "^2017.3.1026",
-    "@progress/kendo-charts-react-wrapper": "^2017.3.1026",
     "@progress/kendo-layout-react-wrapper": "^2017.3.1026",
     "@progress/kendo-theme-bootstrap": "^2.8.3",
     "@progress/kendo-ui": "^2017.3.1026",
     "bootstrap": "git://github.com/twbs/bootstrap.git#95f37e4c402df37db16781995ffa1592032df9c8",
+    "gh-pages": "^1.0.0",
     "marked": "^0.3.6",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
@@ -61,7 +62,7 @@
     "node-sass": "^4.5.2",
     "sass-loader": "^6.0.3"
   },
-  "scripts": {    
+  "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "node scripts/start.js",
