@@ -4,13 +4,33 @@ import {userRetrieved} from './../../actions';
 import {Switch} from '@progress/kendo-inputs-react-wrapper';
 
     const baseUrl = 'https://api.github.com/users/simonssspirit';
+    const Success = () => {
+            return (
+                <div className="alert alert-success">
+                 <strong>Success!</strong> The profile is updated!
+                </div>
+            );
+    }
+
+    const Warning = () => {
+            return (
+                <div className="alert alert-warning">
+                 <strong>Deleted!</strong> The profile is Deleted!
+                </div>
+            );
+    }
     class Profile extends Component {
 
     constructor(props) {
             super(props);
+            this.state = {
+                alertVisible: false,
+                deleteAlertVisible:false
+            }
             this.updateProfile = this.updateProfile.bind(this);
             this.deleteProfile = this.deleteProfile.bind(this);
         }
+        
 
     componentDidMount() {
         let headers = {
@@ -30,8 +50,14 @@ import {Switch} from '@progress/kendo-inputs-react-wrapper';
             .then(json => this.props.dispatch(userRetrieved(json)));
     }
 
-    updateProfile = (e) => { alert("Profile is updated")}
-    deleteProfile = (e) => { alert("Profile is deleted")}
+    updateProfile = (e) => {
+        this.setState({ alertVisible: true })
+        setTimeout(function() { this.setState({alertVisible: false}); }.bind(this),2000);
+    }
+    deleteProfile = (e) => {
+        this.setState({ deleteAlertVisible: true })
+        setTimeout(function() { this.setState({deleteAlertVisible: false}); }.bind(this),2000);
+    }
     
     render() {
         
@@ -93,6 +119,7 @@ import {Switch} from '@progress/kendo-inputs-react-wrapper';
                                     <div className="form-group">
                                         <button className="btn btn-primary" onClick={this.updateProfile}>Update profile</button>
                                     </div>
+                                    { this.state.alertVisible && <Success /> }
                                 </div>
                             </div>
                         </div>
@@ -106,6 +133,9 @@ import {Switch} from '@progress/kendo-inputs-react-wrapper';
                                 <strong>This cannot be undone!</strong>
                             </p>
                             <button className="btn btn-danger" onClick={this.deleteProfile}>Delete Account</button>
+                            <div className="delete-container">
+                              { this.state.deleteAlertVisible && <Warning /> }
+                            </div>  
                         </div>
                     </div>
                 </div>
@@ -158,7 +188,6 @@ import {Switch} from '@progress/kendo-inputs-react-wrapper';
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {users: state.users.users}
 }
 

@@ -24,3 +24,7 @@ span.active {
 .text-xs-center img {
   width: 200px;
 }
+
+.delete-container{
+  margin-top: 15px;
+}
