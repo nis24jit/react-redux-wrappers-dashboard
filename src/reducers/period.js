@@ -1,5 +1,5 @@
 var initialState = {
-    period: 7
+    period: 30
 };
 
 export const period = (state = initialState, action) => {

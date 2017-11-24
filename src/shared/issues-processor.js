@@ -167,7 +167,7 @@ export class IssuesProcessor {
 
     static filterByDays(data, days) {
       return data.filter(value => {
-        return new Date(value.created_at).getTime() < this.getDaysRange(days).getTime();
+        return new Date(value.created_at).getTime() > this.getDaysRange(days).getTime();
       });
     }
 

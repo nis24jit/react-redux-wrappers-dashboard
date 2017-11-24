@@ -274,12 +274,12 @@ class ActiveIssues extends Component {
                         <p className="m-0 small text-uppercase text-muted">
                             Highest: 
                             {closeRate?Math.round(closeRate.highest.close_rate * 100) + " % ":""}
-                            on {closeRate? kendo.toString(new Date(Date(closeRate.highest.created_at)), "MMM dd, yyyy"):""}
+                            on {closeRate? kendo.toString(new Date(+closeRate.highest.created_at), "MMM dd, yyyy"):""}
                         </p>
                         <p className="m-0 small text-uppercase text-muted">
                             Lowest: 
                             {closeRate?Math.round(closeRate.lowest.close_rate * 100) + " % ":""}
-                            on {closeRate? kendo.toString(new Date(Date(closeRate.lowest.created_at)), "MMM dd, yyyy"):""}
+                            on {closeRate? kendo.toString(new Date(+closeRate.lowest.created_at), "MMM dd, yyyy"):""}
                         </p>
                         <Chart dataSource={this.props.closeRateIssues} {...this.closeRateOptions}></Chart>
                     </div>

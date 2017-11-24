@@ -5,21 +5,27 @@ import { ButtonGroup, ButtonGroupItem as Button } from '@progress/kendo-buttons-
 class Issues extends Component {
     changePeriod = (e) => {
        let indexToPeriod = {
-           0: 7,
+           0: 30,
            1: 14,
-           2: 30
+           2: 7
        }
        this.props.onPeriodChange(indexToPeriod[e.index])
     }
 
     render() {
+        let today = new Date();
+        let rangeStart = new Date();
+        
+        rangeStart.setDate(today.getDate()-this.props.period);
+        
         return (
+            /* eslint-disable */
             <div className="issues" id="issues">
                 <div className="row mb-4">
                     <div className="col-sm">
                         <h2>
-                            <span className="small text-uppercase text-muted d-block">Issues</span>
-                            {/* {{range.from | date}} - {{range.to | date}} */}
+                            <span className="small text-uppercase text-muted d-block">Statistics</span>
+                            {kendo.toString(rangeStart, "MMM dd, yyyy") + " - " + kendo.toString(today, "MMM dd, yyyy")}
                         </h2>
                     </div>
                     <div className="col-sm text-sm-right">
@@ -31,6 +37,7 @@ class Issues extends Component {
                     </div>
                 </div>
             </div>
+            /* eslint-enable */
         );
     };
 }

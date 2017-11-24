@@ -7,7 +7,7 @@ export const issues = (state = initialState, action) => {
     let newState = {};
     
     let data = action.payload;
-    let period = action.period ? action.period : 7;
+    let period = action.period ? action.period : 30;
 
     switch (action.type) {
         case 'ISSUES_RECEIVED':
@@ -47,7 +47,6 @@ export const issues = (state = initialState, action) => {
 
             let typesDistribution = allIssues.typesDistribution;
 
-            debugger;
             let seriesColors = [
                 { label: "SEV: Low", value: "#FF9966", active: false },
                 { label: "SEV: Medium", value: "#BB6ACB", active: false },

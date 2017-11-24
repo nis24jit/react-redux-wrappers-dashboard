@@ -14,7 +14,7 @@ import registerServiceWorker from './registerServiceWorker';
 ReactDOM.render((
 
     <Provider store={issuesStore}>
-        <BrowserRouter>
+        <BrowserRouter basename="/">
             <App />
         </BrowserRouter>
     </Provider>

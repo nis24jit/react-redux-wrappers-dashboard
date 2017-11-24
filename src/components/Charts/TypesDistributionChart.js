@@ -54,7 +54,7 @@ class TypesDistribution extends Component {
                 { label: "Feature", value: "#FF6358", active: false },
                 { label: "Others", value: "#2BA7DA", active: false }
             ];
-
+      
             this.typesSeries = [];
             this.chartTypeClick = this.chartTypeClick.bind(this)
     }
@@ -85,7 +85,7 @@ class TypesDistribution extends Component {
         if(this.props.types.typesSeries !== undefined){
             this.typesSeries = this.props.types.typesSeries;
         }
-        
+
         return (
             <div className="card">
                 <h4 className="card-header">Types Distribution</h4>

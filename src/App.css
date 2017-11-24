@@ -22,7 +22,7 @@ span.active {
 }
 
 .text-xs-center img {
-  width: 200px;
+  max-width: 100%;
 }
 
 .delete-container{

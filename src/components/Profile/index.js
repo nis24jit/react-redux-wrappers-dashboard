@@ -4,6 +4,7 @@ import {userRetrieved} from './../../actions';
 import {Switch} from '@progress/kendo-inputs-react-wrapper';
 
     const baseUrl = 'https://api.github.com/users/simonssspirit';
+
     const Success = () => {
             return (
                 <div className="alert alert-success">
@@ -23,6 +24,7 @@ import {Switch} from '@progress/kendo-inputs-react-wrapper';
 
     constructor(props) {
             super(props);
+
             this.state = {
                 alertVisible: false,
                 deleteAlertVisible:false
@@ -30,7 +32,6 @@ import {Switch} from '@progress/kendo-inputs-react-wrapper';
             this.updateProfile = this.updateProfile.bind(this);
             this.deleteProfile = this.deleteProfile.bind(this);
         }
-        
 
     componentDidMount() {
         let headers = {
@@ -119,7 +120,9 @@ import {Switch} from '@progress/kendo-inputs-react-wrapper';
                                     <div className="form-group">
                                         <button className="btn btn-primary" onClick={this.updateProfile}>Update profile</button>
                                     </div>
+          
                                     { this.state.alertVisible && <Success /> }
+
                                 </div>
                             </div>
                         </div>
