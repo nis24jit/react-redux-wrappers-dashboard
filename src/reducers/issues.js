@@ -62,6 +62,8 @@ export const issues = (state = initialState, action) => {
 
             let visibleSeries=[];
 
+            let counter = 0
+
             for (let item in typesDistribution) {
                 visibleSeries.push(
                     {
@@ -70,9 +72,11 @@ export const issues = (state = initialState, action) => {
                         name: item,
                         aggregate: "count",
                         style: "smooth",
+                        color:seriesColors[counter].value,
                         data: typesDistribution[item]
                     }
                 );
+                counter++;
             }
 
             newState = {
