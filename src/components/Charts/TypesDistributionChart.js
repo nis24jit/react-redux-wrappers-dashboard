@@ -7,6 +7,9 @@ class TypesDistribution extends Component {
         super(props);
 
         this.options = {
+            legend:{
+                visible:false
+            },
             seriesDefaults: {
                 type: "line",
                 overlay: false,
