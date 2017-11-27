@@ -16,7 +16,7 @@ import {Switch} from '@progress/kendo-inputs-react-wrapper';
     const Warning = () => {
             return (
                 <div className="alert alert-warning">
-                 <strong>Deleted!</strong> The profile is Removed!
+                 <strong>Deleted!</strong> The profile is removed!
                 </div>
             );
     }
