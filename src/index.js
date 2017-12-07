@@ -14,7 +14,7 @@ import registerServiceWorker from './registerServiceWorker';
 ReactDOM.render((
 
     <Provider store={issuesStore}>
-        <BrowserRouter basename="/">
+        <BrowserRouter basename="/react-redux-wrappers-dashboard">
             <App />
         </BrowserRouter>
     </Provider>
